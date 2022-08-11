@@ -1,0 +1,7 @@
+canvas{
+  background-color: rgba(138, 138, 209, 0.5);
+}
+
+canvas:hover{
+  background-color: yellow;
+}
