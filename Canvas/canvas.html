@@ -11,39 +11,93 @@
     <canvas id="canvas" width="500" height="500">
       Hola tu navegador no funciona
     </canvas>
+    <img id="scream" width="220" height="277" src="pic_the_scream.jpg" alt="The Scream" style="display: none">
     <script type="text/javascript">
       var cv = document.getElementById('canvas');
       var ctx = cv.getContext('2d');
-      console.log(ctx);
+      var color = "rgba(251, 84, 170, 0.4)";
 
-      ctx.fillStyle = "rgb(200,0,0)";
-      ctx.fillRect (10, 10, 55, 50);
+      // Cuadros
+//      ctx.fillStyle = "rgb(200,0,0)";
+//      ctx.fillRect (10, 10, 55, 50);
 
-      ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
-      ctx.fillRect (30, 30, 55, 50);
+//      ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
+//      ctx.fillRect (30, 30, 55, 50);
 
-      ctx.fillStyle = "rgba(0, 200, 0, 0.5)";
-      ctx.fillRect (50, 50, 55, 50);
+//      ctx.fillStyle = "rgba(0, 200, 0, 0.5)";
+//      ctx.fillRect (50, 50, 55, 50);
 
+    // linea roja
 //      ctx.moveTo(250, 100);
 //      ctx.lineTo(410, 280);
 //      ctx.strokeStyle = "red";
 //      ctx.stroke();
 
+    // Triangulo rectangulo azul
 //      ctx.moveTo(200, 100);
 //      ctx.lineTo(200, 300);
 //      ctx.lineTo(400, 300);
 //      ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
 //      ctx.fill();
 
-      ctx.beginPath();
-      ctx.arc(200, 50, 40, 0, 2 * Math.PI);
-      ctx.stroke();
+    // Circulos
+//      ctx.beginPath();
+//      ctx.arc(200, 50, 40, 0, 2 * Math.PI);
+//      ctx.stroke();
 
-      ctx.beginPath();
-      ctx.arc(290, 50, 40, 0, 2 * Math.PI);
-      ctx.fillStyle = "rgba(251, 84, 170, 0.8)";
-      ctx.fill();
+//      ctx.beginPath();
+//      ctx.arc(290, 50, 40, 0, 2 * Math.PI);
+//      ctx.fillStyle = "rgba(251, 84, 170, 0.8)";
+//      ctx.fill();
+
+      // Texto
+//      ctx.font = "30px Arial";
+//      ctx.fillText("Hello World", 10, 50);
+//      ctx.strokeText("Hello World", 10, 100);
+
+      // Crear gradiante
+//      var grd = ctx.createLinearGradient(0, 0, 100, 0);
+
+      // Crear gradiente circular
+//      var grd = ctx.createRadialGradient(75, 80, 5, 90, 60, 100);
+
+      // Añadir colores
+//      grd.addColorStop(0, "red");
+//      grd.addColorStop(1, "white");
+
+      // Rellenar gradiante
+//      ctx.fillStyle = grd;
+//      ctx.fillRect(10, 10, 160, 100);
+
+      // Dibujar imagen
+//      var img = document.getElementById("scream");
+//      ctx.drawImage(img, 0, 0);
+
+      // Eventos
+      cv.addEventListener('click', onClick);
+      cv.addEventListener('mouseover', onMouseOver);
+
+      function onClick(e){
+        ctx.beginPath();
+        ctx.arc(e.offsetX, e.offsetY, 40, 0, 2 * Math.PI);
+        ctx.fillStyle = color;
+        ctx.fill();
+        ctx.stroke();
+      }
+
+      function onMouseOver(e){
+        color = getRandomColor();
+      }
+
+      function getRandomColor() {
+        var trans = '0.2'; // 50% transparency
+        var color = 'rgba(';
+        for (var i = 0; i < 3; i++) {
+          color += Math.floor(Math.random() * 255) + ',';
+        }
+        color += trans + ')'; // add the transparency
+        return color;
+      }
 
     </script>
   </body>
