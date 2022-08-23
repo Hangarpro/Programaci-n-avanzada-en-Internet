@@ -12,14 +12,15 @@
       Hola tu navegador no funciona
     </canvas>
     <img id="scream" width="220" height="277" src="pic_the_scream.jpg" alt="The Scream" style="display: none">
+    <img id="MCR" width="50" height="90" src="MCR.jpg" alt="The MCR" style="display: none">
     <script type="text/javascript">
-var cv = document.getElementById('canvas');
-var ctx = cv.getContext('2d');
+var cv = null;
+var ctx = null;
 var color = 'rgba(251, 84, 170, 0.4)';
 var fig = 'arc';
 var press = false;
 var moveX = 0;
-var moveY = 0;
+var moveY = 250;
 
 //      Cuadros
 //      ctx.fillStyle = "rgb(200,0,0)";
@@ -77,7 +78,7 @@ var moveY = 0;
 //      var img = document.getElementById("scream");
 //      ctx.drawImage(img, 0, 0);
 
-//      Eventos
+//     Eventos
 // cv.addEventListener('click', onClick);
 // cv.addEventListener('mouseover', onMouseOver);
 // cv.addEventListener('mouseout', onMouseOut);
@@ -87,6 +88,7 @@ var moveY = 0;
 document.addEventListener('keydown', onKeyDown);
 
 // function onClick(e) {
+//    console.log(e);
 //   if (fig == 'arc') {
 //     ctx.beginPath();
 //     ctx.arc(e.offsetX, e.offsetY, 40, 0, 2 * Math.PI);
@@ -99,22 +101,22 @@ document.addEventListener('keydown', onKeyDown);
 //     ctx.fill();
 //     ctx.stroke();
 //   }
-// }
+//}
 
 // function onMouseOver(e) {
 //   color = getRandomColor();
 // }
 
-// function getRandomColor() {
-//   var trans = '0.2'; // 50% transparency
-//   var color = 'rgba(';
-//   for (var i = 0; i < 3; i++) {
-//     color += Math.floor(Math.random() * 255) + ',';
-//   }
+function getRandomColor() {
+  var trans = '0.2'; // 50% transparency
+  var color = 'rgba(';
+  for (var i = 0; i < 3; i++) {
+    color += Math.floor(Math.random() * 255) + ',';
+  }
 
-//   color += trans + ')'; // add the transparency
-//   return color;
-// }
+  color += trans + ')'; // add the transparency
+  return color;
+}
 
 // function onMouseOut(e) {
 //   fig = (fig == 'arc') ? 'rec' : 'arc';
@@ -158,12 +160,230 @@ function onKeyDown(e) {
 }
 
 function paint() {
-  ctx.fillStyle = 'white';
+  ctx.fillRect(moveX, moveY, 50, 50);
+  window.requestAnimationFrame(paint);
+  ctx.fillStyle = getRandomColor();
   ctx.fillRect(0, 0, 500, 500);
   ctx.fillStyle = 'red';
-  ctx.fillRect(moveX, moveY, 50, 50);
+
   ctx.strokeRect(moveX, moveY, 50, 50);
+
+  moveX += 10;
+
+  if (moveX == 500) {
+    moveX = 0;
+  }
 }
+
+// Avatar
+// ctx.beginPath();
+// ctx.arc(190, 60, 50, 1 * Math.PI, 2 * Math.PI);
+// ctx.fillStyle = 'rgb(33, 16, 5)';
+// ctx.fill();
+// ctx.beginPath();
+// ctx.arc(190, 60, 40, 0, 2 * Math.PI);
+// ctx.fillStyle = 'rgb(252, 184, 138)';
+// ctx.fill();
+// ctx.fillRect(169, 85, 40, 20);
+// ctx.beginPath();
+// ctx.arc(170, 55, 5, 0, 2 * Math.PI);
+// ctx.fillStyle = 'rgb(0, 0, 0)';
+// ctx.fill();
+// ctx.beginPath();
+// ctx.arc(190, 55, 5, 0, 2 * Math.PI);
+// ctx.fill();
+// ctx.beginPath();
+// ctx.arc(180, 70, 5, 0, 1 * Math.PI);
+// ctx.fillRect(150, 100, 80, 100);
+// ctx.moveTo(150, 100);
+// ctx.lineTo(105, 180);
+// ctx.lineTo(150, 180);
+// ctx.fill();
+// ctx.moveTo(230, 100);
+// ctx.lineTo(275, 180);
+// ctx.lineTo(230, 180);
+// ctx.fill();
+// ctx.beginPath();
+// ctx.fillStyle = 'rgb(34, 60, 102)';
+// ctx.fillRect(150, 200, 80, 90);
+// ctx.fillStyle = 'white';
+// ctx.moveTo(190, 250);
+// ctx.lineTo(180, 290);
+// ctx.lineTo(200, 290);
+// ctx.fill();
+// ctx.moveTo(230, 140);
+// ctx.lineTo(255, 185);
+// ctx.lineTo(230, 185);
+// ctx.fill();
+// ctx.moveTo(150, 140);
+// ctx.lineTo(125, 185);
+// ctx.lineTo(150, 185);
+// ctx.fill();
+// ctx.font = '20px Arial';
+// ctx.fillText('MCR', 165, 150);
+// ctx.fillStyle = 'rgb(65, 48, 24)';
+// ctx.fillRect(140, 290, 40, 20);
+// ctx.fillRect(190, 290, 40, 20);
+// ctx.beginPath();
+// ctx.arc(116, 184, 12, 0, 2 * Math.PI);
+// ctx.fillStyle = 'rgb(252, 184, 138)';
+// ctx.arc(265, 184, 12, 0, 2 * Math.PI);
+// ctx.fill();
+// var img = document.getElementById('MCR');
+// ctx.drawImage(img, 180, 165);
+
+// Paisaje
+/*ctx.fillStyle = '#e77f4b';
+ctx.fillRect(150, 70, 140, 70);
+ctx.beginPath();
+ctx.arc(250, 550, 240, 0, 2 * Math.PI);
+ctx.fillStyle = '#79bf71';
+ctx.fill();
+ctx.fillStyle = '#fce6a9';
+ctx.fillRect(150, 140, 200, 200);
+ctx.beginPath();
+ctx.moveTo(210, 140);
+ctx.lineTo(210, 340);
+ctx.strokeStyle = 'black';
+ctx.stroke();
+ctx.strokeStyle = 'gray';
+ctx.moveTo(250, 70);
+ctx.lineTo(170, 140);
+ctx.stroke();
+ctx.moveTo(270, 70);
+ctx.lineTo(190, 140);
+ctx.stroke();
+ctx.moveTo(217, 80);
+ctx.lineTo(280, 78);
+ctx.stroke();
+ctx.moveTo(205, 90);
+ctx.lineTo(280, 88);
+ctx.stroke();
+ctx.moveTo(193, 100);
+ctx.lineTo(280, 98);
+ctx.stroke();
+ctx.moveTo(181, 110);
+ctx.lineTo(280, 108);
+ctx.stroke();
+ctx.moveTo(169, 120);
+ctx.lineTo(280, 118);
+ctx.stroke();
+ctx.moveTo(157, 130);
+ctx.lineTo(280, 128);
+ctx.stroke();
+ctx.moveTo(210, 140);
+ctx.lineTo(290, 69);
+ctx.lineTo(350, 140);
+ctx.fill();
+ctx.beginPath();
+ctx.fillStyle = '#89bbf5';
+ctx.moveTo(150, 140);
+ctx.lineTo(150, 70);
+ctx.lineTo(230, 70);
+ctx.fill();
+ctx.beginPath();
+ctx.fillStyle = '#f2e968';
+ctx.rect(160, 280, 30, 60);
+ctx.fill();
+ctx.stroke();
+ctx.beginPath();
+ctx.arc(165, 310, 5, 0, 2 * Math.PI);
+ctx.fillStyle = 'gray';
+ctx.fill();
+ctx.beginPath();
+ctx.fillStyle = '#89bbf5';
+ctx.strokeStyle = 'white';
+ctx.rect(230, 160, 40, 40);
+ctx.rect(290, 160, 40, 40);
+ctx.rect(230, 240, 40, 40);
+ctx.rect(290, 240, 40, 40);
+ctx.rect(160, 160, 40, 40);
+ctx.fill();
+ctx.stroke();
+ctx.moveTo(250, 160);
+ctx.lineTo(250, 200);
+ctx.stroke();
+ctx.moveTo(230, 180);
+ctx.lineTo(270, 180);
+ctx.stroke();
+ctx.moveTo(310, 160);
+ctx.lineTo(310, 200);
+ctx.stroke();
+ctx.moveTo(290, 180);
+ctx.lineTo(330, 180);
+ctx.stroke();
+ctx.moveTo(250, 240);
+ctx.lineTo(250, 280);
+ctx.stroke();
+ctx.moveTo(230, 260);
+ctx.lineTo(270, 260);
+ctx.stroke();
+ctx.moveTo(310, 240);
+ctx.lineTo(310, 280);
+ctx.stroke();
+ctx.moveTo(290, 260);
+ctx.lineTo(330, 260);
+ctx.stroke();
+ctx.moveTo(180, 160);
+ctx.lineTo(180, 200);
+ctx.stroke();
+ctx.moveTo(160, 180);
+ctx.lineTo(200, 180);
+ctx.stroke();
+ctx.beginPath();
+ctx.strokeStyle = '#144c65';
+ctx.moveTo(275, 75);
+ctx.lineTo(275, 45);
+ctx.stroke();
+ctx.moveTo(260, 50);
+ctx.lineTo(290, 50);
+ctx.stroke();
+ctx.moveTo(265, 57);
+ctx.lineTo(285, 57);
+ctx.stroke();
+ctx.moveTo(270, 64);
+ctx.lineTo(280, 64);
+ctx.stroke();
+ctx.beginPath();
+ctx.arc(500, 0, 90, 0.5 * Math.PI, 1.5 * Math.PI);
+ctx.fillStyle = '#fcf79d';
+ctx.fill();
+ctx.beginPath();
+ctx.arc(50, 65, 20, 0, 2 * Math.PI);
+ctx.arc(70, 55, 20, 0, 2 * Math.PI);
+ctx.arc(90, 65, 20, 0, 2 * Math.PI);
+ctx.arc(85, 80, 20, 0, 2 * Math.PI);
+ctx.arc(55, 80, 20, 0, 2 * Math.PI);
+ctx.fillStyle = 'white';
+ctx.fill();
+ctx.beginPath();
+ctx.arc(325, 45, 20, 0, 2 * Math.PI);
+ctx.arc(345, 35, 20, 0, 2 * Math.PI);
+ctx.arc(365, 45, 20, 0, 2 * Math.PI);
+ctx.arc(360, 60, 20, 0, 2 * Math.PI);
+ctx.arc(330, 60, 20, 0, 2 * Math.PI);
+
+ctx.arc(340, 45, 20, 0, 2 * Math.PI);
+ctx.arc(360, 35, 20, 0, 2 * Math.PI);
+ctx.arc(380, 45, 20, 0, 2 * Math.PI);
+ctx.arc(375, 60, 20, 0, 2 * Math.PI);
+ctx.arc(345, 60, 20, 0, 2 * Math.PI);
+ctx.fill();*/
+
+window.requestAnimationFrame = (function () {
+    return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        function (callback) {
+            window.setTimeout(callback, 17); }; }());
+
+function run() {
+  cv = document.getElementById('canvas');
+  ctx = cv.getContext('2d');
+  paint();
+}
+
+window.addEventListener('load', run, false);
     </script>
   </body>
 </html>
