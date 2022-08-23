@@ -19,8 +19,11 @@ var ctx = null;
 var color = 'rgba(251, 84, 170, 0.4)';
 var fig = 'arc';
 var press = false;
-var moveX = 0;
-var moveY = 250;
+var direccion = 'right';
+var player1 = null;
+var player2 = null;
+var score = 0;
+var speed = 1;
 
 //      Cuadros
 //      ctx.fillStyle = "rgb(200,0,0)";
@@ -136,42 +139,82 @@ function getRandomColor() {
 // function onMouseUp(e) {
 //   press = false;
 // }
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
 
 function onKeyDown(e) {
   console.log(e);
 
   if (e.key == 'w' || e.key == 'W') {
-    moveY -= 10;
+      direccion = 'up';
   }
 
   if (e.key == 'a' || e.key == 'A') {
-    moveX -= 10;
+      direccion = 'left';
   }
 
   if (e.key == 's' || e.key == 'S') {
-    moveY += 10;
+      direccion = 'down';
   }
 
   if (e.key == 'd' || e.key == 'D') {
-    moveX += 10;
+      direccion = 'right';
   }
-
-  paint();
 }
 
 function paint() {
-  ctx.fillRect(moveX, moveY, 50, 50);
+
   window.requestAnimationFrame(paint);
-  ctx.fillStyle = getRandomColor();
+  ctx.fillStyle = 'pink';
   ctx.fillRect(0, 0, 500, 500);
-  ctx.fillStyle = 'red';
+  ctx.fillStyle = 'black';
+  ctx.font = '20px Arial';
+  ctx.fillText('Score:' + score, 5, 20);
+  player1.paint(ctx);
+  player2.paint(ctx);
 
-  ctx.strokeRect(moveX, moveY, 50, 50);
+  update();
+}
 
-  moveX += 10;
+function update() {
+  if (direccion == 'up') {
+    player1.y -= speed;
 
-  if (moveX == 500) {
-    moveX = 0;
+    if (player1.y < 0) {
+      player1.y = 500;
+    }
+  }
+
+  if (direccion == 'left') {
+    player1.x -= speed;
+
+    if (player1.x < 0) {
+      player1.x = 500;
+    }
+  }
+
+  if (direccion == 'down') {
+    player1.y += speed;
+
+    if (player1.y > 500) {
+      player1.y = 0;
+    }
+  }
+
+  if (direccion == 'right') {
+    player1.x += speed;
+
+    if (player1.x > 500) {
+      player1.x = 0;
+    }
+  }
+
+  if (player1.intersects(player2)) {
+    player2.x = getRandomInt(490);
+    player2.y = getRandomInt(490);
+    score += 10;
+    speed += 1;
   }
 }
 
@@ -370,6 +413,28 @@ ctx.arc(375, 60, 20, 0, 2 * Math.PI);
 ctx.arc(345, 60, 20, 0, 2 * Math.PI);
 ctx.fill();*/
 
+function Cuadro(x, y, w, h, c) {
+  this.x = x;
+  this.y = y;
+  this.w = w;
+  this.h = h;
+  this.c = c;
+  this.intersects = function (target) {
+    if (this.x < target.x + target.w &&
+      this.x + this.w > target.x &&
+      this.y < target.y + target.h &&
+      this.y + this.h > target.y) {
+      return true;
+    }
+  };
+
+  this.paint = function (ctx) {
+    ctx.fillStyle = this.c;
+    ctx.fillRect(this.x, this.y, this.w, this.h);
+    ctx.strokeRect(this.x, this.y, this.w, this.h);
+  };
+}
+
 window.requestAnimationFrame = (function () {
     return window.requestAnimationFrame ||
         window.webkitRequestAnimationFrame ||
@@ -380,6 +445,8 @@ window.requestAnimationFrame = (function () {
 function run() {
   cv = document.getElementById('canvas');
   ctx = cv.getContext('2d');
+  player1 = new Cuadro(0, 0, 40, 40, 'red');
+  player2 = new Cuadro(getRandomInt(490), getRandomInt(490), 40, 40, 'blue');
   paint();
 }
 
