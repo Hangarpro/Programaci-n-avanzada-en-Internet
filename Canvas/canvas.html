@@ -24,6 +24,8 @@ var player1 = null;
 var player2 = null;
 var score = 0;
 var speed = 1;
+var pause = false;
+var pared = [null, null, null, null];
 
 //      Cuadros
 //      ctx.fillStyle = "rgb(200,0,0)";
@@ -147,19 +149,23 @@ function onKeyDown(e) {
   console.log(e);
 
   if (e.key == 'w' || e.key == 'W') {
-      direccion = 'up';
+    direccion = 'up';
   }
 
   if (e.key == 'a' || e.key == 'A') {
-      direccion = 'left';
+    direccion = 'left';
   }
 
   if (e.key == 's' || e.key == 'S') {
-      direccion = 'down';
+    direccion = 'down';
   }
 
   if (e.key == 'd' || e.key == 'D') {
-      direccion = 'right';
+    direccion = 'right';
+  }
+
+  if (e.keyCode == 32) {
+    pause = (pause) ? false : true;
   }
 }
 
@@ -173,8 +179,18 @@ function paint() {
   ctx.fillText('Score:' + score, 5, 20);
   player1.paint(ctx);
   player2.paint(ctx);
+  for (var i = 0; i < 4; i++) {
+    pared[i].paint(ctx);
+  }
 
-  update();
+  if (pause) {
+    ctx.fillStyle = 'rgba(0 ,0 ,0 ,0.5)';
+    ctx.fillRect(0, 0, 500, 500);
+    ctx.fillStyle = 'white';
+    ctx.fillText('P A U S E', 200, 250);
+  } else {
+    update();
+  }
 }
 
 function update() {
@@ -215,6 +231,43 @@ function update() {
     player2.y = getRandomInt(490);
     score += 10;
     speed += 1;
+  }
+
+  for (var i = 0; i < 4; i++) {
+    if (player1.intersects(pared[i])) {
+      if (direccion == 'up') {
+        player1.y += speed;
+
+        if (player1.y < 0) {
+          player1.y = 500;
+        }
+      }
+
+      if (direccion == 'left') {
+        player1.x += speed;
+
+        if (player1.x < 0) {
+          player1.x = 500;
+        }
+      }
+
+      if (direccion == 'down') {
+        player1.y -= speed;
+
+        if (player1.y > 500) {
+          player1.y = 0;
+        }
+      }
+
+      if (direccion == 'right') {
+        player1.x -= speed;
+
+        if (player1.x > 500) {
+          player1.x = 0;
+        }
+      }
+
+    }
   }
 }
 
@@ -447,6 +500,10 @@ function run() {
   ctx = cv.getContext('2d');
   player1 = new Cuadro(0, 0, 40, 40, 'red');
   player2 = new Cuadro(getRandomInt(490), getRandomInt(490), 40, 40, 'blue');
+  pared[0] = new Cuadro(20, 150, 20, 200, 'gray');
+  pared[1] = new Cuadro(440, 150, 20, 200, 'gray');
+  pared[2] = new Cuadro(150, 60, 200, 20, 'gray');
+  pared[3] = new Cuadro(150, 400, 200, 20, 'gray');
   paint();
 }
 
