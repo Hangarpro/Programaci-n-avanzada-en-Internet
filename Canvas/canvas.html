@@ -26,6 +26,10 @@ var score = 0;
 var speed = 1;
 var pause = false;
 var pared = [null, null, null, null];
+var guy = new Image();
+var weed = new Image();
+var wall = new Image();
+var fx = new Audio();
 
 //      Cuadros
 //      ctx.fillStyle = "rgb(200,0,0)";
@@ -177,10 +181,11 @@ function paint() {
   ctx.fillStyle = 'black';
   ctx.font = '20px Arial';
   ctx.fillText('Score:' + score, 5, 20);
-  player1.paint(ctx);
-  player2.paint(ctx);
+  ctx.drawImage(guy, player1.x, player1.y);
+  ctx.drawImage(weed, player2.x, player2.y);
   for (var i = 0; i < 4; i++) {
     pared[i].paint(ctx);
+    ctx.drawImage(wall, pared[i].x, pared[i].y, pared[i].w, pared[i].h);
   }
 
   if (pause) {
@@ -227,6 +232,7 @@ function update() {
   }
 
   if (player1.intersects(player2)) {
+    fx.play();
     player2.x = getRandomInt(490);
     player2.y = getRandomInt(490);
     score += 10;
@@ -504,6 +510,10 @@ function run() {
   pared[1] = new Cuadro(440, 150, 20, 200, 'gray');
   pared[2] = new Cuadro(150, 60, 200, 20, 'gray');
   pared[3] = new Cuadro(150, 400, 200, 20, 'gray');
+  guy.src = 'guy.png';
+  weed.src = 'weed.png';
+  wall.src = 'wall.png';
+  fx.src = 'fx.mp3';
   paint();
 }
 
