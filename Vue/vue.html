@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Vue.js</title>
+    <script src="https://unpkg.com/vue@3"></script>
+  </head>
+  <body>
+    <div id="app">
+      <input type="number" v-model="n1" name="">
+      <input type="number" v-model="n2" name="">
+      <button type="button" name="button" @click='suma'>Sumar</button>
+      <h3>{{n3}}</h3>
+
+    </div>
+    <script type="text/javascript">
+  const { createApp } = Vue;
+  const vapp = createApp({
+    data() {
+      return {
+        n1: 0,
+        n2: 0,
+        n3: 0,
+      }
+    },
+
+    methods: {
+      suma() {
+        this.n3 = this.n1+ this.n2
+      }
+    },
+  }).mount('#app');
+
+    </script>
+  </body>
+</html>
