@@ -7,50 +7,51 @@
   </head>
   <body>
     <div id="app">
-      <input type="number" v-model="n1" name="">
-      <input type="number" v-model="n2" name="">
-      <button type="button" name="button" @click='suma'>Sumar</button>
-      <h3>{{n3}}</h3>
-      <hr>
-
-      <input type="number" name="" v-model="age">
-      <h1 v-if="age < 18">No pase</h1>
-      <h1 v-else>Pase</h1>
-      <hr>
-      <ol>
-        <li v-for="item in morros">
-          {{item.nombre}} : <span>{{item.role}}</span>
-        </li>
-      </ol>
-      <input type="text" name="" v-model="morroName">
-      <input type="text" name="" v-model="morroRole">
-      <button type="button" name="button" @click='save'>Añadir a lista</button>
+      {{users}}
+      <form class="" action="index.html" method="post">
+        <fieldset>
+          <legend>Acceso al panel</legend>
+          <label for="">Correo electronico</label>
+          <input type="email" name="" value="">
+          <label for="">Password</label>
+          <input type="password" name="" value="">
+          <button type="button" name="button" @click='login'>Acceder</button>
+        </fieldset>
+      </form>
     </div>
     <script type="text/javascript">
   const { createApp } = Vue;
   const vapp = createApp({
     data() {
       return {
-        n1: 0,
-        n2: 0,
-        n3: 0,
-        age: 0,
-        morros: [{nombre: 'Iran', role: 'Back'}],
-        morroName: 0,
-        morroRole: 0,
+        users: '',
+        email: '',
+        password: '',
       }
     },
 
     methods: {
-      suma() {
-        this.n3 = this.n1+ this.n2
+      login(e) {
+        e.preventDefault();
+        var email_user = this.email;
+        var password_user = this.password;
+        var access = this.users.map(function (u) {
+          if (email_user === u.email.toLowerCase()) {
+            if (password_user === u.password){
+              alert("Acceso correcto");
+            }
+          }
+        })
+        alert("Acceso incorrecto");
       },
-      save() {
-        this.morros.push({nombre:this.morroName, role:this.morroRole})
-      }
-    },
-  }).mount('#app');
-
+      mounted() {
+        fetch("users.json")
+          .then((res) => res.json())
+          .then((json) => (this.users = json))
+          .catch((err) => (console.log(err)))
+      },
+    }
+  }).mount('#app')
     </script>
   </body>
 </html>
