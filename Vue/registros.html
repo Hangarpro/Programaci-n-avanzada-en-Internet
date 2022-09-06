@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Vue.js</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="app" class="content-wrapper">
+      <section class="content-header">
+          <div class="container-fluid">
+              <div class="row mb-2">
+                  <div class="col-sm-6">
+                    <h2>Bienvenido {{usuarioActual}}</h1>
+                  </div>
+              </div>
+          </div>
+      </section>
+      <div class="card">
+        <div class="card-body">
+        <table class="table table-sm table-bordered">
+          <thead class="table-light">
+            <th>Nombre</th>
+            <th>Correo</th>
+          </thead>
+          <tr v-for="user in users">
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+          </tr>
+        </table>
+          <div class="input-group flex-nowrap center-block">
+            <input type="text" name="" v-model="userName" placeholder="Nombre" class="input-group-text">
+            <input type="text" name="" v-model="userEmail" placeholder="Correo" class="input-group-text">
+            <button type="button" name="button" class="btn btn-outline-secondary" @click="saveUser">Añadir</button>
+          </div>
+      </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
