@@ -7,7 +7,33 @@ const vapp = createApp({
       password: '',
       usuarioActual: sessionStorage.getItem('name'),
       userName: '',
+      userAcc: '',
       userEmail: '',
+      userPhone: '',
+      userWeb: '',
+      userStreet: '',
+      userSuite: '',
+      userCity: '',
+      userZip: '',
+      mostrar: true,
+      total: 10,
+      idEditar: '',
+      registro: true,
+      userData: {
+        id: '',
+        name: '',
+        username: '',
+        password: '',
+        email: '',
+        address: {
+          street: '',
+          suite: '',
+          city: '',
+          zipcode: '',
+        },
+        phone: '',
+        website: '',
+      },
     };
   },
 
@@ -34,8 +60,64 @@ const vapp = createApp({
     },
 
     saveUser() {
-      this.users.push({ name: this.userName, email: this.userEmail }),
+      this.users.push({ id: this.total + 1,
+                        name: this.userName,
+                        username: this.userAcc,
+                        password: this.password,
+                        email: this.userEmail,
+                        address: {
+                          street: this.userStreet,
+                          suite: this.userSuite,
+                          city: this.userCity,
+                          zipcode: this.userZip,
+                        },
+                        phone: this.userPhone,
+                        website: this.userWeb,
+                      }),
       alert('Usuario agregado');
+      this.mostrar = true;
+      this.total += 1;
+    },
+
+    editUser() {
+      this.userData = {
+        id: this.idEditar + 1,
+        name: this.userName,
+        username: this.userAcc,
+        password: this.password,
+        email: this.userEmail,
+        address: {
+          street: this.userStreet,
+          suite: this.userSuite,
+          city: this.userCity,
+          zipcode: this.userZip,
+        },
+        phone: this.userPhone,
+        website: this.userWeb,
+      };
+      this.users[this.idEditar] = this.userData;
+      alert('Usuario editado');
+      this.mostrar = true;
+    },
+
+    cancelar() {
+      this.mostrar = true;
+    },
+
+    deleteUser(id) {
+      this.users = this.users.filter((user) => user.id !== id);
+      alert('Usuario eliminado');
+    },
+
+    editForm(id) {
+      this.mostrar = false;
+      this.registro = false;
+      this.idEditar = id - 1;
+    },
+
+    añadir() {
+      this.mostrar = false;
+      this.registro = true;
     },
   },
   mounted() {
