@@ -14,7 +14,7 @@
           <div class="">
 
             <div class="">
-              <form class="" action="index.html" method="post">
+              <form class="" action="products" method="get">
                 <div class="mb-6 flex justify-center ">
                   <img
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/2048px-Tailwind_CSS_Logo.svg.png"
