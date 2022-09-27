@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <?php include  "./../templates/head.php"; ?>
+    <?php include "./../templates/head.php"; ?>
   </head>
   <body>
     <!-- navbar -->
@@ -21,7 +21,6 @@
               </div>
             </div>
             <div class="row">
-              <?php for ($i=0; $i < 12; $i++): ?>
               <div class="col-md-3 p-2">
                 <div class="card" style="width: 18rem;">
                   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/2048px-Tailwind_CSS_Logo.svg.png" class="card-img-top" alt="...">
@@ -33,13 +32,9 @@
                       <a href="#" class="btn btn-warning col-md-6" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar</a>
                       <a href="#" class="btn btn-danger col-md-6" onclick="remove(this)">Eliminar</a>
                     </div>
-                    <div class="row">
-                      <a href="./detalles.php" class="btn btn-info col-md-12">Detalles</a>
-                    </div>
                   </div>
                 </div>
               </div>
-            <?php endfor; ?>
             </div>
           <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
