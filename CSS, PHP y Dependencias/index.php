@@ -14,7 +14,7 @@
           <div class="">
 
             <div class="">
-              <form class="" action="products" method="get">
+              <form class="" action="./app/AuthController.php" method="post">
                 <div class="mb-6 flex justify-center ">
                   <img
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/2048px-Tailwind_CSS_Logo.svg.png"
@@ -26,11 +26,12 @@
                 <div class="mb-6">
                   <input
                   class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  type="text" name="" value="" placeholder="Enter email">
+                  type="text" name="email" value="" placeholder="Enter email">
                 </div>
                 <div class="mb-6">
                   <input
                   type="password"
+                  name="password"
                   class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   placeholder="Password">
                 </div>
@@ -42,6 +43,7 @@
                 >
                 Acceder
                 </button>
+                <input type="hidden" name="action" value="access">
               </form>
             </div>
           </div>
