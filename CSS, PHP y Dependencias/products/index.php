@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<?php
+include_once './../app/Products.php';
+$temp = new Products();
+$productos = $temp->getProducts();
+?>
 <html lang="en" dir="ltr">
   <head>
     <?php include  "./../templates/head.php"; ?>
@@ -20,15 +24,26 @@
                 <button class="btn btn-info float-end mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button" name="button">Añadir producto</button>
               </div>
             </div>
-            <div class="row">
-              <?php for ($i=0; $i < 12; $i++): ?>
-              <div class="col-md-3 p-2">
-                <div class="card" style="width: 18rem;">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/2048px-Tailwind_CSS_Logo.svg.png" class="card-img-top" alt="...">
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+              <?php foreach ($productos as $producto) {?>
+              <div class="col">
+                <div class="card border-info h-100" style="width: 18rem;">
+                  <img src="<?php echo $producto->cover ?>" class="card-img-top" alt="...">
                   <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h5 class="card-title"><?php echo $producto->name ?></h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                      <?php
+                      if ($producto->brand != null){
+                        echo $producto->brand->name;
+                      } else{
+                        echo "- - -";
+                      }
+                        ?>
+                    </h6>
+                    <p class="card-text"><?php echo $producto->description ?></p>
+
+                  </div>
+                  <div class="card-footer">
                     <div class="row">
                       <a href="#" class="btn btn-warning col-md-6" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar</a>
                       <a href="#" class="btn btn-danger col-md-6" onclick="remove(this)">Eliminar</a>
@@ -39,7 +54,7 @@
                   </div>
                 </div>
               </div>
-            <?php endfor; ?>
+              <?php } ?>
             </div>
           <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
