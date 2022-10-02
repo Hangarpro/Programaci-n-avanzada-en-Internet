@@ -61,36 +61,36 @@ $productos = $temp->getProducts();
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Añadir Producto</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <form class="" action="./../app/ProductsController.php" method="post">
+                  <form enctype="multipart/form-data" action="./../app/ProductsController.php" method="post">
 
 
                   <div class="modal-body">
-                    <div class="input-group mb-3">
-                      <span class="input-group-text" id="basic-addon1">@</span>
-                      <input type="text" name="name" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1">
+                    <div class="form-floating mb-3">
+                      <input type="text" name="name" class="form-control" placeholder="Tostitos Hot" id="name">
+                      <label for="name">Nombre</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input type="text" name="slug" class="form-control" placeholder="tostitos-hot" id="slug">
+                      <label for="slug">Slug</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input type="text" name="description" class="form-control" placeholder="Tostitos versión picante" id="description">
+                      <label for="description">Descripción</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input type="text" name="features" class="form-control" placeholder="Ricos y baratos" id="features">
+                      <label for="features">Caracteristicas</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input type="text"name="brand" class="form-control" placeholder="Sabritas" id="brand">
+                      <label for="brand">Marca</label>
                     </div>
                     <div class="input-group mb-3">
-                      <span class="input-group-text" id="basic-addon1">@</span>
-                      <input type="text" name="slug" class="form-control" placeholder="Slug" aria-label="Slug" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-3">
-                      <span class="input-group-text" id="basic-addon1">@</span>
-                      <input type="text" name="description" class="form-control" placeholder="Description" aria-label="Description" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-3">
-                      <span class="input-group-text" id="basic-addon1">@</span>
-                      <input type="text" name="features" class="form-control" placeholder="Features" aria-label="Features" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-3">
-                      <span class="input-group-text" id="basic-addon1">@</span>
-                      <input type="text"name="brand" class="form-control" placeholder="Brand" aria-label="Brand" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="input-group mb-3">
-                      <span class="input-group-text" id="basic-addon1">@</span>
-                      <input type="text" name="cover" class="form-control" placeholder="Cover" aria-label="Cover" aria-describedby="basic-addon1">
+                      <input type="file" name="cover" class="form-control" placeholder="Cover" id="cover">
+                      <span class="input-group-text" for="cover">Upload</span>
                     </div>
                   </div>
                   <div class="modal-footer">

@@ -55,6 +55,7 @@ class Products
 
   public function createProduct($name, $slug, $description, $features, $brand)
   {
+    $img = $_FILES["cover"]["tmp_name"];
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
@@ -70,7 +71,8 @@ class Products
                                   'slug' => $slug,
                                   'description' => $description,
                                   'features' => $features,
-                                  'brand_id' => $brand),
+                                  'brand_id' => $brand,
+                                  'cover' => new CURLFILE($img)),
       CURLOPT_HTTPHEADER => array(
         'Authorization: Bearer ' . $_SESSION['token']
       ),
