@@ -1,7 +1,10 @@
 <?php
 include_once './../app/ProductsController.php';
+include_once './../app/BrandController.php';
 $temp = new Products();
 $productos = $temp->getProducts();
+$temp = new BrandController();
+$marcas = $temp->getBrands();
 ?>
 <html lang="en" dir="ltr">
   <head>
@@ -69,33 +72,37 @@ $productos = $temp->getProducts();
 
                   <div class="modal-body">
                     <div class="form-floating mb-3">
-                      <input type="text" name="name" class="form-control" placeholder="Tostitos Hot" id="name">
+                      <input type="text" name="name" class="form-control" placeholder="Tostitos Hot" id="name" required>
                       <label for="name">Nombre</label>
                     </div>
                     <div class="form-floating mb-3">
-                      <input type="text" name="slug" class="form-control" placeholder="tostitos-hot" id="slug">
+                      <input type="text" name="slug" class="form-control" placeholder="tostitos-hot" id="slug" required>
                       <label for="slug">Slug</label>
                     </div>
                     <div class="form-floating mb-3">
-                      <input type="text" name="description" class="form-control" placeholder="Tostitos versión picante" id="description">
+                      <input type="text" name="description" class="form-control" placeholder="Tostitos versión picante" id="description" required>
                       <label for="description">Descripción</label>
                     </div>
                     <div class="form-floating mb-3">
-                      <input type="text" name="features" class="form-control" placeholder="Ricos y baratos" id="features">
+                      <input type="text" name="features" class="form-control" placeholder="Ricos y baratos" id="features" required>
                       <label for="features">Caracteristicas</label>
                     </div>
-                    <div class="form-floating mb-3">
-                      <input type="text"name="brand" class="form-control" placeholder="Sabritas" id="brand">
-                      <label for="brand">Marca</label>
+                    <div class="input-group mb-3">
+                      <label class="input-group-text" for="brand">Marca</label>
+                      <select class="form-select" id="brand" name="brand" required>
+                        <?php foreach ($marcas as $marca) {?>
+                        <option value="<?php echo $marca->id; ?>"><?php echo $marca->name ?></option>
+                      <?php } ?>
+                      </select>
                     </div>
                     <div class="input-group mb-3">
-                      <input type="file" name="cover" class="form-control" placeholder="Cover" id="cover">
-                      <span class="input-group-text" for="cover">Upload</span>
+                      <input type="file" name="cover" class="form-control" placeholder="Cover" id="cover" required>
+                      <span class="input-group-text" for="cover">Subir</span>
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Añadir producto</button>
                   </div>
                   <input type="hidden" name="action" value="create">
                   </form>
