@@ -52,7 +52,7 @@ $marcas = $temp->getBrands();
                       <a href="#" class="btn btn-danger col-md-6" onclick="remove(this)">Eliminar</a>
                     </div>
                     <div class="row">
-                      <a href="./detalles.php" class="btn btn-info col-md-12">Detalles</a>
+                      <a href="./detalles.php?slug=<?php echo $producto->slug?>" class="btn btn-info col-md-12">Detalles</a>
                     </div>
                   </div>
                 </div>
