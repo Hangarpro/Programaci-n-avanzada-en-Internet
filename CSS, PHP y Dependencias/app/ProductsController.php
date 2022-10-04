@@ -13,6 +13,17 @@ if (isset($_POST['action'])) {
       $productsController->createProduct($name, $slug, $description, $features, $brand);
       break;
 
+    case 'update':
+      $name = strip_tags($_POST['name']);
+      $slug = strip_tags($_POST['slug']);
+      $description = strip_tags($_POST['description']);
+      $features = strip_tags($_POST['features']);
+      $brand = strip_tags($_POST['brand']);
+      $id = strip_tags($_POST['id']);
+      $productsController = new Products;
+      $productsController->editProduct($name, $slug, $description, $features, $brand, $id);
+      break;
+
     default:
       // code...
       break;
@@ -114,6 +125,35 @@ class Products
     if (isset ($response->code) && $response->code > 0){
         return $response->data;
     } else{
+      header("Location:../products?error=true");
+    }
+  }
+
+  public function editProduct($name, $slug, $description, $features, $brand, $id)
+  {
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => 'https://crud.jonathansoto.mx/api/products',
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'PUT',
+      CURLOPT_POSTFIELDS => 'name=' . $name. '&slug=' . $slug. '&description=' . $description.'&features=' . $features.'&brand_id=' . $brand.'&id=' . $id,
+      CURLOPT_HTTPHEADER => array(
+        'Authorization: Bearer ' . $_SESSION['token']
+      ),
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+    if (isset ($response->code) && $response->code > 0){
+          header("Location:../products");
+    } else {
       header("Location:../products?error=true");
     }
   }

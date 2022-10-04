@@ -24,7 +24,7 @@ $marcas = $temp->getBrands();
                 <span>Productos</span>
               </div>
               <div class="col">
-                <button class="btn btn-info float-end mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button" name="button">Añadir producto</button>
+                <button onclick="addProduct()" class="btn btn-info float-end mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button" name="button">Añadir producto</button>
               </div>
             </div>
             <div class="row row-cols-1 row-cols-md-4 g-4">
@@ -48,7 +48,7 @@ $marcas = $temp->getBrands();
                   </div>
                   <div class="card-footer">
                     <div class="row">
-                      <a href="#" class="btn btn-warning col-md-6" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar</a>
+                      <a href="#" data-product='<?php echo json_encode($producto) ?>' onclick="editProduct(this)" class="btn btn-warning col-md-6" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar</a>
                       <a href="#" class="btn btn-danger col-md-6" onclick="remove(this)">Eliminar</a>
                     </div>
                     <div class="row">
@@ -96,7 +96,7 @@ $marcas = $temp->getBrands();
                       </select>
                     </div>
                     <div class="input-group mb-3">
-                      <input type="file" name="cover" class="form-control" placeholder="Cover" id="cover" required>
+                      <input type="file" name="cover" class="form-control" placeholder="Cover" id="cover" >
                       <span class="input-group-text" for="cover">Subir</span>
                     </div>
                   </div>
@@ -104,7 +104,8 @@ $marcas = $temp->getBrands();
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-primary">Añadir producto</button>
                   </div>
-                  <input type="hidden" name="action" value="create">
+                  <input type="hidden" name="action" id="productInput">
+                  <input type="hidden" id="id" name="id">
                   </form>
                 </div>
               </div>
@@ -132,6 +133,27 @@ $marcas = $temp->getBrands();
             swal("Your imaginary file is safe!");
           }
         });
+      }
+
+      function addProduct() {
+        document.getElementById('productInput').value = 'create';
+        document.getElementById("name").value = "";
+        document.getElementById("slug").value = "";
+        document.getElementById("description").value = "";
+        document.getElementById("features").value = "";
+        document.getElementById("brand").value = 1;
+      }
+
+      function editProduct(target) {
+        document.getElementById('productInput').value = 'update';
+        let product = JSON.parse(target.getAttribute('data-product'));
+        document.getElementById("name").value = product.name;
+        document.getElementById("slug").value = product.slug;
+        document.getElementById("description").value = product.description;
+        document.getElementById("features").value = product.features;
+        document.getElementById("brand").value = product.brand_id;
+        document.getElementById("id").value = product.id;
+
       }
     </script>
   </body>
