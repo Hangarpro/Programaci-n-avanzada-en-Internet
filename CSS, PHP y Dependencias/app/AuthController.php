@@ -1,17 +1,20 @@
 <?php
+include_once 'config.php';
 
 if (isset($_POST['action'])) {
-  switch ($_POST['action']) {
-    case 'access':
+  if (isset($_POST['g_token']) && $_POST['g_token'] == $_SESSION['g_token']) {
+    switch ($_POST['action']) {
+      case 'access':
       $authController = new AuthController;
       $email = strip_tags($_POST['email']);
       $password = strip_tags($_POST['password']);
       $authController->login($email,$password);
       break;
 
-    default:
+      default:
       // code...
       break;
+    }
   }
 }
   /**
