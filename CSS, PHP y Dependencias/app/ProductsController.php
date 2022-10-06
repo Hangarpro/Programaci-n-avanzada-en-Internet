@@ -24,6 +24,12 @@ if (isset($_POST['action'])) {
       $productsController->editProduct($name, $slug, $description, $features, $brand, $id);
       break;
 
+      case 'remove':
+            $id = strip_tags($_POST['id']);
+            $productsController = new Products;
+            $productsController->remove($id);
+        break;
+
     default:
       // code...
       break;
@@ -156,6 +162,35 @@ class Products
     } else {
       header("Location:../products?error=true");
     }
+  }
+
+  public function remove($id)
+  {
+    $curl = curl_init();
+
+       curl_setopt_array($curl, array(
+       CURLOPT_URL => 'https://crud.jonathansoto.mx/api/products/'.$id,
+       CURLOPT_RETURNTRANSFER => true,
+       CURLOPT_ENCODING => '',
+       CURLOPT_MAXREDIRS => 10,
+       CURLOPT_TIMEOUT => 0,
+       CURLOPT_FOLLOWLOCATION => true,
+       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+       CURLOPT_CUSTOMREQUEST => 'DELETE',
+       CURLOPT_HTTPHEADER => array(
+           'Authorization: Bearer ' . $_SESSION['token']
+       ),
+       ));
+
+       $response = curl_exec($curl);
+
+       curl_close($curl);
+       $response = json_decode ($response);
+       if (isset ($response->code) && $response->code > 0) {
+           return true;
+       } else {
+           return false;
+       }
   }
 }
 

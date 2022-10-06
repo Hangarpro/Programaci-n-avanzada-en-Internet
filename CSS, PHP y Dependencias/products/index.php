@@ -49,7 +49,7 @@ $marcas = $temp->getBrands();
                   <div class="card-footer">
                     <div class="row">
                       <a href="#" data-product='<?php echo json_encode($producto) ?>' onclick="editProduct(this)" class="btn btn-warning col-md-6" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar</a>
-                      <a href="#" class="btn btn-danger col-md-6" onclick="remove(this)">Eliminar</a>
+                      <a href="#" class="btn btn-danger col-md-6" onclick="remove(<?php echo $producto->id ?>)">Eliminar</a>
                     </div>
                     <div class="row">
                       <a href="./detalles.php?slug=<?php echo $producto->slug?>" class="btn btn-info col-md-12">Detalles</a>
@@ -116,21 +116,32 @@ $marcas = $temp->getBrands();
     <?php include "./../templates/scripts.php"; ?>
 
     <script type="text/javascript">
-      function remove(target){
+      function remove(id){
         swal({
-          title: "Are you sure?",
-          text: "Once deleted, you will not be able to recover this imaginary file!",
+          title: "¿Estás seguro?",
+          text: "Una vez eliminado, ya no podrás recuperar este producto!",
           icon: "warning",
           buttons: true,
           dangerMode: true,
         })
         .then((willDelete) => {
           if (willDelete) {
-            swal("Poof! Your imaginary file has been deleted!", {
+            swal("El producto ha sido eliminado satisfactoriamente", {
               icon: "success",
             });
+            var bodyFormData = new FormData();
+               bodyFormData.append('id', id);
+               bodyFormData.append('action', 'remove');
+               axios.post('./../app/ProductsController.php', bodyFormData)
+               .then(function (response){
+                   console.log(response);
+                   location.reload();
+               })
+               .catch(function (error){
+                   console.log('error')
+               })
           } else {
-            swal("Your imaginary file is safe!");
+            swal("Tu producto esta a salvo!");
           }
         });
       }
