@@ -106,6 +106,7 @@ $marcas = $temp->getBrands();
                   </div>
                   <input type="hidden" name="action" id="productInput">
                   <input type="hidden" id="id" name="id">
+                  <input type="hidden" name="g_token" value="<?php echo $_SESSION['g_token'] ?>">
                   </form>
                 </div>
               </div>
@@ -132,6 +133,7 @@ $marcas = $temp->getBrands();
             var bodyFormData = new FormData();
                bodyFormData.append('id', id);
                bodyFormData.append('action', 'remove');
+               bodyFormData.append('g_token', '<?php echo $_SESSION['g_token'] ?>');
                axios.post('./../app/ProductsController.php', bodyFormData)
                .then(function (response){
                    console.log(response);
