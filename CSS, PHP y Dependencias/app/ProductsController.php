@@ -102,9 +102,9 @@ class Products
     curl_close($curl);
     $response = json_decode($response);
     if (isset ($response->code) && $response->code > 0){
-      header("Location:./../products?success=true");
+      header("Location:".BASE_PATH."products?success=true");
     } else{
-      header("Location:../products?error=true");
+      header("Location:".BASE_PATH."products?error=true");
     }
   }
 
@@ -133,7 +133,7 @@ class Products
     if (isset ($response->code) && $response->code > 0){
         return $response->data;
     } else{
-      header("Location:../products?error=true");
+      header("Location:".BASE_PATH."products?error=true");
     }
   }
 
@@ -160,9 +160,9 @@ class Products
 
     curl_close($curl);
     if (isset ($response->code) && $response->code > 0){
-          header("Location:../products");
+          header("Location:".BASE_PATH."products");
     } else {
-      header("Location:../products?error=true");
+      header("Location:".BASE_PATH."products?error=true");
     }
   }
 

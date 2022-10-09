@@ -1,4 +1,5 @@
 <?php
+include_once './../app/config.php';
 include_once './../app/ProductsController.php';
 include_once './../app/BrandController.php';
 $temp = new Products();
@@ -67,7 +68,7 @@ $marcas = $temp->getBrands();
                     <h5 class="modal-title" id="exampleModalLabel">Añadir Producto</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <form enctype="multipart/form-data" action="./../app/ProductsController.php" method="post">
+                  <form enctype="multipart/form-data" action=<?php echo BASE_PATH ?>"prod" method="post">
 
 
                   <div class="modal-body">
@@ -134,7 +135,7 @@ $marcas = $temp->getBrands();
                bodyFormData.append('id', id);
                bodyFormData.append('action', 'remove');
                bodyFormData.append('g_token', '<?php echo $_SESSION['g_token'] ?>');
-               axios.post('./../app/ProductsController.php', bodyFormData)
+               axios.post('<?php echo BASE_PATH ?>prod', bodyFormData)
                .then(function (response){
                    console.log(response);
                    location.reload();

@@ -43,13 +43,12 @@ if (isset($_POST['action'])) {
       curl_close($curl);
       $response = json_decode($response);
       if (isset ($response->code) && $response->code > 0){
-        session_start();
         $_SESSION['id'] = $response->data->id;
         $_SESSION['name'] = $response->data->name;
         $_SESSION['lastname'] = $response->data->lastname;
         $_SESSION['avatar'] = $response->data->avatar;
         $_SESSION['token'] = $response->data->token;
-        header("Location:./../products/index.php");
+        header("Location:".BASE_PATH."products");
       } else{
         header("Location:../?error=true");
       }

@@ -15,7 +15,7 @@
           <div class="">
 
             <div class="">
-              <form class="" action="auth" method="post">
+              <form class="" action="<?php echo BASE_PATH ?>auth" method="post">
                 <div class="mb-6 flex justify-center ">
                   <img
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/2048px-Tailwind_CSS_Logo.svg.png"
