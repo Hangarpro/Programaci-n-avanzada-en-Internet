@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('saludo/{name}', function () {
+Route::get('saludo/{name}', function ($name) {
     echo "Hola ".$name;
 });
 
