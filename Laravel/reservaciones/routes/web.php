@@ -22,6 +22,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('login/', function () {
+    return view('auth/login');
+})->name('login');
+
 Route::get('saludo/{name}', function ($name) {
     echo "Hola ".$name;
 });
@@ -61,3 +65,8 @@ Route::get('reservations/', [ReservationController::class, 'index']);
 Route::get('reservations/create', [ReservationController::class, 'create']);
 
 Route::get('reservations/{id}', [ReservationController::class, 'show']);
+
+
+Route::get('/prueba', function () {
+    return "Hola";
+})->middleware('auth');

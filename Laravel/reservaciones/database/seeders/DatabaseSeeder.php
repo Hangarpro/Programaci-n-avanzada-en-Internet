@@ -21,6 +21,10 @@ class DatabaseSeeder extends Seeder
       $this->call([
         ReservationSeeder::class,
       ]);
+
+      $this->call([
+        UserSeeder::class,
+      ]);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
